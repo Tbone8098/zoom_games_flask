@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="title">
+    <div class="flex justify-between align-center">
+        <h1>{{game.name}} Balderdash's Game</h1>
+        <ul class="ul-menu">
+            <li><a href="/balderdash/{{game.id}}/delete" class="btn">Close Game</a></li>
+        </ul>
+    </div>
+    <div class="flex align-center">
+        <h3>Members:</h3>
+        <ul class="ul-menu">
+            {% for player in all_players %}
+            <li>
+                {{player.username}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="main-content">
+    <div>
+        <button class="btn btnJs" action="form" data="word-form">Add a word</button>
+    </div>
+    <div class="form word-form" style="display: none;">
+        <form action="" method="post">
+            <div>
+                <label for="word">Word</label>
+                <input type="text" name="word" id="word">
+            </div>
+            <div>
+                <label for="definition">Definition</label>
+                <input type="text" name="definition" id="definition">
+            </div>
+            <button>Add word</button>
+        </form>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='js/balderdash.js')}}"></script>
+{% endblock %}

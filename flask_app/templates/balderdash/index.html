@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="title">
+    <h1>Balderdash</h1>
+    <ul class="ul-menu">
+        <li><button class="btn btnJs" action="form" data="create-game">Create Game</button></li>
+        <li><button class="btn btnJs" action="form" data="join-game">Join Game</button></li>
+    </ul>
+</div>
+<div class="main-content">
+    <div class="create-game form" style="display: none;">
+        <form action="/balderdash/create" method="post">
+            <div>
+                <label for="name">Game Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div>
+                <label for="code">Game Code</label>
+                <input type="text" name="code" id="code">
+            </div>
+            <div>
+                <label for="username">Your username</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <button>Create</button>
+        </form>
+    </div>
+    <div class="join-game form" style="display: none;">
+        <form action="/balderdash/join" method="post">
+            <div>
+                <label for="code">Game Code</label>
+                <input type="text" name="code" id="code">
+            </div>
+            <div>
+                <label for="username">Your username</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <button>Join</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
