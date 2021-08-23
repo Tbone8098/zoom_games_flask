@@ -9,16 +9,43 @@
 </div>
 <div class="main-content">
     <div class="create-game form" style="display: none;">
-        <form action="/balderdash/create" method="post">
+        <form action="/balderdash/game/create" method="post">
             <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'game_name' %}
+                <p class='{{ category }}'>{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <label for="name">Game Name</label>
                 <input type="text" name="name" id="name">
             </div>
             <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'game_code' %}
+                <p class='{{ category }}'>{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <label for="code">Game Code</label>
                 <input type="text" name="code" id="code">
             </div>
             <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'username' %}
+                <p class='{{ category }}'>{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <label for="username">Your username</label>
                 <input type="text" name="username" id="username">
             </div>
@@ -26,7 +53,7 @@
         </form>
     </div>
     <div class="join-game form" style="display: none;">
-        <form action="/balderdash/join" method="post">
+        <form action="/balderdash/game/join" method="post">
             <div>
                 <label for="code">Game Code</label>
                 <input type="text" name="code" id="code">
@@ -40,5 +67,5 @@
     </div>
 </div>
 
-
+<script src="{{url_for('static', filename='js/balderdash.js')}}"></script>
 {% endblock %}

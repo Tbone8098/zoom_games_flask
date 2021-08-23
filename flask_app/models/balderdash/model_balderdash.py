@@ -45,6 +45,7 @@ class Game:
 
     @classmethod
     def get_one_by_code(cls, data):
+        """data keys = code"""
         query = 'SELECT * from games WHERE code = %(code)s;'
         results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
         if len(results) > 0:
@@ -73,12 +74,21 @@ class Game:
 
 # Validations for Games
     @staticmethod
-    def validate_games(user_data):
+    def validate_games(data):
+        """data keys = game_name, game_code"""
+        print("*"*80)
+        print(data)
         is_valid = True
-
-        if len(user_data['name']) < 3: 
+        if len(data['game_name']) < 3: 
             is_valid = False
-            flash('name name must be greater than 3 characters')
+            flash('name name must be greater than 3 characters', 'game_name')
+
+        check_game_code = Game.get_one_by_code({
+            'code': data['game_code']
+        })
+        if check_game_code != False:
+            is_valid = False
+            flash("Game Code already in use", 'game_code')
         
         return is_valid
 
@@ -131,13 +141,10 @@ class Player:
         return results
     
     @classmethod
-    def get_one(cls, username_id):
-        query = 'SELECT * FROM players WHERE id = %(username_id)s;'
-        data = {
-            'username_id': username_id
-        }
+    def get_one(cls, data):
+        """data keys = player_id"""
+        query = 'SELECT * FROM players WHERE id = %(player_id)s;'
         results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
-        one_players = []
         if len(results) > 0:
            return cls(results[0])
         return results
@@ -155,16 +162,12 @@ class Player:
 
 # D !!!!!!!!!!!!!!!!!!!!!!!!
     @classmethod
-    def delete_one(cls, username_id):
-        query = 'DELETE FROM players WHERE id=%(username_id)s'
-        data = {
-            'usernameid': username_id
-        }
+    def delete_one(cls, data):
+        query = 'DELETE FROM players WHERE id=%(id)s'
         connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
         return id
 
-
-# ******************************************* VALIDATIONS ********************************************
+# Validations
     @staticmethod
     def validate_players(user_data):
         is_valid = True

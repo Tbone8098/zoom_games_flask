@@ -4,16 +4,15 @@
     <div class="flex justify-between align-center">
         <h1>{{game.name}} Balderdash's Game</h1>
         <ul class="ul-menu">
-            <li><a href="/balderdash/{{game.id}}/delete" class="btn">Close Game</a></li>
+            <li><a href="/balderdash/game/{{game.id}}/delete" class="btn">Close Game</a></li>
+            <!-- <li><a href="/balderdash/{{game.id}}/delete" class="btn">Leave Game</a></li> -->
         </ul>
     </div>
     <div class="flex align-center">
         <h3>Members:</h3>
-        <ul class="ul-menu">
+        <ul class="ul-menu player-list">
             {% for player in all_players %}
-            <li>
-                {{player.username}}
-            </li>
+            <li player_id="{{player.id}}">{{player.username}}</li>
             {% endfor %}
         </ul>
     </div>
@@ -37,5 +36,9 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
 <script src="{{url_for('static', filename='js/balderdash.js')}}"></script>
+<script src="{{url_for('static', filename='js/balderdash_game.js')}}"></script>
 {% endblock %}
