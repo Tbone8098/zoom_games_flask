@@ -8,44 +8,24 @@
     </ul>
 </div>
 <div class="main-content">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="create-game form" style="display: none;">
         <form action="/balderdash/game/create" method="post">
             <div>
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                {% if category == 'game_name' %}
-                <p class='{{ category }}'>{{ message }}</p>
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
                 <label for="name">Game Name</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="Tbo">
             </div>
             <div>
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                {% if category == 'game_code' %}
-                <p class='{{ category }}'>{{ message }}</p>
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
                 <label for="code">Game Code</label>
-                <input type="text" name="code" id="code">
+                <input type="text" name="code" id="code" value="123456789">
             </div>
             <div>
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                {% if category == 'username' %}
-                <p class='{{ category }}'>{{ message }}</p>
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
                 <label for="username">Your username</label>
                 <input type="text" name="username" id="username">
             </div>
