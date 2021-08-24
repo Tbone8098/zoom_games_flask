@@ -48,13 +48,13 @@ def join_game():
         "game_code": request.form['code']
     })
 
-    player = model_player.Player.create({
+    player_id = model_player.Player.create({
         'username': request.form['username'],
         'game_id': game.id
     })
 
     session['game_code'] = game.code
-    session['uuid']
+    session['uuid'] = player_id
 
     return redirect(f'/balderdash/game/{game.id}')
 
@@ -74,7 +74,7 @@ def game_page(game_id):
 
     return render_template('/balderdash/game_page.html', **context)
 
-@app.route('/balderdash/<int:game_id>/delete')
+@app.route('/balderdash/game/<int:game_id>/delete')
 def delete_game(game_id):
     all_players = model_player.Player.get_all_in_game({
         'game_id': game_id

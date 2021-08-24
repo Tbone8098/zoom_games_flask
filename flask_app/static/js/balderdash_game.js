@@ -4,7 +4,7 @@ socket.on('connect', function () {
 });
 
 socket.on('connected_resp', (data) => {
-    console.log(data);
+    console.log(data['msg']);
     var playerList = document.querySelector('.player-list')
     var is_there = false
     for (const player of playerList.children) {
