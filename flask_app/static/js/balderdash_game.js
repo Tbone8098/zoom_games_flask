@@ -16,7 +16,30 @@ socket.on('connected_resp', (data) => {
         playerList.innerHTML += `
         <li class="${data['player_info']['id']}">${data['player_info']['username']}</li>
         `
-    } else {
-        console.log("Name is there");
+        alert(`${data['player_info']['username']} has joined the game`)
     }
 })
+
+
+var leaveGame = document.querySelector('#leave-game')
+
+leaveGame.addEventListener('click', () => {
+    socket.emit('leave_game')
+})
+
+socket.on("leave_game_resp", (data) => {
+    window.location.href = '/balderdash'
+})
+
+socket.on("leave_game_resp_broadcast", (data) => {
+    console.log(`${data['username']} has left the game`);
+    var playerList = document.querySelector('.player-list')
+    for (const player of playerList.children) {
+        console.log(player.textContent);
+        if (data['username'] === player.textContent){
+            alert(`${player.textContent} is leaving the game`);
+            player.remove()
+        }
+    }
+})
+

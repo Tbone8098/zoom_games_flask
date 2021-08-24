@@ -79,8 +79,8 @@ class Game:
 # D !!!!!!!!!!!!!!!!!!!!!!!!
     @classmethod
     def delete_one(cls, data):
-        '''data = {"id": id}'''
-        query = 'DELETE FROM games WHERE id=%(id)s'
+        '''data = {"game_id": id}'''
+        query = 'DELETE FROM games WHERE id=%(game_id)s'
         connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
         return id
 

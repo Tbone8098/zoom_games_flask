@@ -78,9 +78,9 @@ class Player:
 # D !!!!!!!!!!!!!!!!!!!!!!!!
     @classmethod
     def delete_one(cls, data):
+        """data keys = id"""
         query = 'DELETE FROM players WHERE id=%(id)s'
         connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
-        return id
 
 # # Validations
 #     @staticmethod

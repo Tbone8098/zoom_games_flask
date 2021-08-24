@@ -1,5 +1,6 @@
-from flask_app import app
+from flask_app import app, socketio
 from flask import render_template, redirect, request, session, flash, jsonify
+from flask_socketio import send, emit
 from flask_app.models.balderdash import model_player, model_game
 
 @app.route('/balderdash')
@@ -29,6 +30,7 @@ def create_game():
         'game_id': game_id
         })
 
+    session['game_id'] = game_id
     session['game_code'] = request.form['code']
     session['uuid'] = player_id
 
@@ -53,6 +55,7 @@ def join_game():
         'game_id': game.id
     })
 
+    session['game_id'] = game.id
     session['game_code'] = game.code
     session['uuid'] = player_id
 
