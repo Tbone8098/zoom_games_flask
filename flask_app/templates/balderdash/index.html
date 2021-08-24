@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="title">
+    <h1>Balderdash</h1>
+    <ul class="ul-menu">
+        <li><button class="btn btnJs" action="form" data="create-game">Create Game</button></li>
+        <li><button class="btn btnJs" action="form" data="join-game">Join Game</button></li>
+    </ul>
+</div>
+<div class="main-content">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="create-game form" style="display: none;">
+        <form action="/balderdash/game/create" method="post">
+            <div>
+                <label for="name">Game Name</label>
+                <input type="text" name="name" id="name" value="Tbo">
+            </div>
+            <div>
+                <label for="code">Game Code</label>
+                <input type="text" name="code" id="code" value="123456789">
+            </div>
+            <div>
+                <label for="username">Your username</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <button>Create</button>
+        </form>
+    </div>
+    <div class="join-game form" style="display: none;">
+        <form action="/balderdash/game/join" method="post">
+            <div>
+                <label for="code">Game Code</label>
+                <input type="text" name="code" id="code" value="123456789">
+            </div>
+            <div>
+                <label for="username">Your username</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <button>Join</button>
+        </form>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='js/balderdash.js')}}"></script>
+{% endblock %}
